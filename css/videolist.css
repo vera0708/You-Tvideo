@@ -59,7 +59,7 @@
     display: none;
 }
 
-.video-card__favorite_active .star {
+.video-card__favorite.active .star {
     display: block;
 }
 

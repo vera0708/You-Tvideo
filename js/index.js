@@ -2,6 +2,8 @@ const API_KEY = 'AIzaSyBRGf0v3Aa62NW4QmpjR3NbHSqVjfTHFn4';
 const VIDEOS_URL = 'https://www.googleapis.com/youtube/v3/videos';
 const SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
+const favoriteIds = JSON.parse(localStorage.getItem('favoriteYT') || '[]')
+console.log('favoriteIds: ', favoriteIds)
 const videoListItems = document.querySelector('.video-list__items');
 
 const convertISOToReadableDuration = (isoDuration) => {
@@ -57,7 +59,10 @@ const displayVideo = (videos) => {
                 <p class="video-card__channel">${video.snippet.channelTitle}</p>
                 <p class="video-card__duration">${convertISOToReadableDuration(video.contentDetails.duration)}</p>
             </a>
-            <button class="video-card__favorite" type="button" aria-label="Добавить в избранное ${video.snippet.title}">
+             <button class="video-card__favorite favorite ${favoriteIds.includes(video.id) ? 'active' : ''
+            }" type="button"
+                    aria-label="Добавить в избранное ${video.snippet.title}"
+                    data-video-id='${video.id}'>
                 <svg class="video-card__icon">
                     <use class="star-o" xlink:href="/image/sprite.svg#star-ob"></use>
                     <use class="star" xlink:href="/image/sprite.svg#star"></use>
@@ -68,9 +73,30 @@ const displayVideo = (videos) => {
         return li;
     })
     videoListItems.append(...listVideos)
-}
+};
+const init = () => {
+    fetchTrendingVideos().then(displayVideo);
+    document.body.addEventListener('click', ({ target }) => {
+        const itemFavorite = target.closest('.favorite');
 
-fetchTrendingVideos().then(displayVideo);
+        if (itemFavorite) {
+            const videoId = itemFavorite.dataset.videoId;
+            if (favoriteIds.includes(videoId)) {
+                favoriteIds.splice(favoriteIds.indexOf(videoId), 1);
+                localStorage.setItem('favoriteYT', JSON.stringify(favoriteIds));
+                itemFavorite.classList.remove('active');
+            } else {
+                favoriteIds.push(videoId);
+                localStorage.setItem('favoriteYT', JSON.stringify(favoriteIds));
+                itemFavorite.classList.add('active');
+            }
+        } else {
+
+        }
+    })
+};
+
+init();
 
 /*etag: "kusSmoRbxX7gr-IWIxWwf68Aj84"
 items: Array(12)
