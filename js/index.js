@@ -34,14 +34,38 @@ const fetchTrendingVideos = async () => {
         url.searchParams.append('regionCode', 'RU');
         url.searchParams.append('maxResults', 12);
         url.searchParams.append('key', API_KEY);
+
         const response = await fetch(url);
+
         if (!response.ok) {
             throw new Error(`HTTP error ${response.status}`);
         } return response.json();
     } catch (error) {
         console.error(error);
     }
-}
+};
+
+const fetchFavoriteVideos = async () => {
+    try {
+        if (favoriteIds.lenght === 0) {
+            return { items: [] };
+        }
+        const url = new URL(VIDEOS_URL);
+        url.searchParams.append('part', 'contentDetails,id,snippet');
+        url.searchParams.append('maxResults', 12);
+        url.searchParams.append('id', favoriteIds.join(','));
+        url.searchParams.append('key', API_KEY);
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error ${response.status}`);
+        } return response.json();
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 const displayVideo = (videos) => {
     videoListItems.textContent = '';
 
@@ -75,7 +99,24 @@ const displayVideo = (videos) => {
     videoListItems.append(...listVideos)
 };
 const init = () => {
-    fetchTrendingVideos().then(displayVideo);
+    const currentPage = location.pathname.split('/').pop();
+
+    const urlSearchParams = new URLSearchParams(location.search);
+    const videoId = urlSearchParams.get('id');
+    const searchQuery = urlSearchParams.get('q');
+    if (currentPage === 'index.html' || currentPage === '') {
+        fetchTrendingVideos().then(displayVideo);
+    } else if (currentPage === 'video.html' && videoId) {
+        console.log('currentPage is video.html and videoId :', videoId)
+    } else if (currentPage === 'favorite.html') {
+        fetchFavoriteVideos().then(displayVideo);
+    } else if (currentPage === 'search.html' && searchQuery) {
+        console.log('currentPage is search:', currentPage)
+    }
+
+    console.log('currentPage: ', currentPage);
+
+
     document.body.addEventListener('click', ({ target }) => {
         const itemFavorite = target.closest('.favorite');
 
