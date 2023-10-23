@@ -1,0 +1,39 @@
+.header {
+    padding: 32px 0 24px;
+}
+
+.header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* .header__link {} */
+
+.header__logo {
+    width: 240px;
+}
+
+.header__link_favorite {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+}
+
+.header__icon {
+    width: 20px;
+    height: 20px;
+}
+
+@media (width <=768px) {
+    .header__link-text {
+        position: fixed;
+        transform: scale(0);
+    }
+
+    .header__logo {
+        max-width: 145px;
+    }
+}

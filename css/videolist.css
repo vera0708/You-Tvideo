@@ -1,0 +1,125 @@
+.video-list {
+    padding: 80px 0;
+}
+
+.video-list__title {
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: 40px;
+    letter-spacing: 0.02em;
+}
+
+.video-list__items {
+    --grid-count: 3;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-count), 1fr);
+    gap: 40px 12px;
+}
+
+/* .video-list__item {} */
+
+.video-card {
+    position: relative;
+}
+
+/* .video-list__card {  }
+.video-card__link {} */
+
+.video-card__thumbnail {
+    border-radius: 16px;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.video-card__title {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+}
+
+.video-card__channel {
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+}
+
+.video-card__duration {
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+}
+
+.video-card__favorite {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.video-card__favorite .star {
+    display: none;
+}
+
+.video-card__favorite_active .star {
+    display: block;
+}
+
+.video-card__icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* .star-o {}
+.star {} */
+@media (width <=1024px) {
+    .video-list {
+        padding: 60px 0;
+    }
+
+    .video-list__title {
+        font-size: 32px;
+        margin-bottom: 32px;
+    }
+
+    .video-list__items {
+        row-gap: 32px;
+    }
+}
+
+@media (width <=768px) {
+    .video-list__items {
+        --grid-count: 2;
+        /* grid-template-columns: repeat(2, 1fr); */
+        gap: 32px 12px;
+    }
+}
+
+@media (width <=560px) {
+    .video-list {
+        padding: 40px 0 60px;
+    }
+
+    .video-list__title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .video-list__items {
+        --grid-count: 1;
+        /* grid-template-columns: 1fr; */
+        gap: 20px;
+    }
+
+    .video-card__title {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+
+    .video-card__channel {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+
+    .video-card__duration {
+        font-size: 14px;
+    }
+}
