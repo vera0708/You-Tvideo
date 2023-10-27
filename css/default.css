@@ -112,6 +112,19 @@ iframe {
     margin: 0 auto;
 }
 
+
+.preload {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin: auto;
+}
+
+.preload__text {
+    margin-top: 20px;
+    color: #ff6a00;
+}
+
 @media (width <=1024px) {
     .container {
         --container-width: 942px;

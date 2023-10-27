@@ -27,6 +27,9 @@
 
 .video__content {
     max-width: 1048px;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+    /* overflow-wrap: break-word; */
 }
 
 .video__title {
@@ -45,6 +48,7 @@
 .video__info {
     font-size: 24px;
     letter-spacing: 0.02em;
+    margin-bottom: 24px;
 }
 
 /* .video__views {}
@@ -119,6 +123,7 @@
 
     .video__info {
         font-size: 20px;
+        margin-bottom: 20px;
     }
 
     .video__description {
@@ -147,6 +152,7 @@
 
     .video__info {
         font-size: 16px;
+        margin-bottom: 12px;
     }
 
     .video__description {

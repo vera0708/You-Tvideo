@@ -9,9 +9,9 @@
 }
 
 /* .header__link {} */
-
 .header__logo {
     width: 240px;
+    height: 32px;
 }
 
 .header__link_favorite {
